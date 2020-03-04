@@ -406,4 +406,26 @@ describe('When using the same spelling library as the CLI', () => {
 			})
 		})
 	})
+
+	describe('an odd interaction where words can go away', () => {
+		const parameters = [
+			["'Poor attack, yourself", 4, 'poor attack your self'],
+			["'Poor attack, yourself ", 4, 'poor attack your self'],
+			["'Poor attack, yourself q", 4, 'poor attack your '],
+			["'Poor attack, yourself qu", 4, 'poor attack your '],
+			["'Poor attack, yourself qui", 4, 'poor attack your '],
+			["'Poor attack, yourself quic", 4, 'poor attack your self '],
+			["'Poor attack, yourself quick", 4, 'poor attack your self quick']
+		]
+
+		parameters.forEach((tuple) => {
+			test(`with min letters of ${tuple[1]}, "${tuple[0]}" should turn into "${tuple[2]}"`, async () => {
+				const nodehun = await initNodehun()
+				const spelling = new NodehunSpelling(nodehun)
+				const rephrased = rephrase(tuple[0] as string, spelling, tuple[1] as number)
+		 
+				expect(rephrased).toEqual(tuple[2])
+			})
+		})
+	});
 })
