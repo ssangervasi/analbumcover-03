@@ -407,7 +407,7 @@ describe('When using the same spelling library as the CLI', () => {
 		})
 	})
 
-	describe('when the remaining letters is less than the min letter count, we should throw words away', () => {
+	describe('when the remaining letters after finding a word is less than the min letter count, we should throw words away', () => {
 		const parameters = [
 			["'Poor attack, yourself", 4, 'poor attack your self'],
 			["'Poor attack, yourself ", 4, 'poor attack your self'],
