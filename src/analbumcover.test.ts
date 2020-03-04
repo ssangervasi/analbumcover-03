@@ -286,13 +286,13 @@ describe('When using the same spelling library as the CLI', () => {
 			[6, null]
 		]
 
-		parameters.forEach((tuple) => {
-			test(`with min letters of ${tuple[0]} we should get ${tuple[1]}`, async () => {
+		parameters.forEach(([minLetters, result]) => {
+			test(`with min letters of ${minLetters} we should get ${result}`, async () => {
 				const nodehun = await initNodehun()
 				const spelling = new NodehunSpelling(nodehun)
-				const rephrased = rephrase(phrase, spelling, tuple[0] as number)
+				const rephrased = rephrase(phrase, spelling, minLetters as number)
 		
-				expect(rephrased).toEqual(tuple[1])
+				expect(rephrased).toEqual(result)
 			})
 		})
 	})
@@ -309,13 +309,13 @@ describe('When using the same spelling library as the CLI', () => {
 			[6, null]
 		]
 
-		parameters.forEach((tuple) => {
-			test(`with min letters of ${tuple[0]} we should get ${tuple[1]}`, async () => {
+		parameters.forEach(([minLetters, result]) => {
+			test(`with min letters of ${minLetters} we should get ${result}`, async () => {
 				const nodehun = await initNodehun()
 				const spelling = new NodehunSpelling(nodehun)
-				const rephrased = rephrase(phrase, spelling, tuple[0] as number)
+				const rephrased = rephrase(phrase, spelling, minLetters as number)
 		
-				expect(rephrased).toEqual(tuple[1])
+				expect(rephrased).toEqual(result)
 			})
 		})
 	})
@@ -332,13 +332,13 @@ describe('When using the same spelling library as the CLI', () => {
 			[6, null]
 		]
 
-		parameters.forEach((tuple) => {
-			test(`with min letters of ${tuple[0]} we should get ${tuple[1]}`, async () => {
+		parameters.forEach(([minLetters, result]) => {
+			test(`with min letters of ${minLetters} we should get ${result}`, async () => {
 				const nodehun = await initNodehun()
 				const spelling = new NodehunSpelling(nodehun)
-				const rephrased = rephrase(phrase, spelling, tuple[0] as number)
+				const rephrased = rephrase(phrase, spelling, minLetters as number)
 		
-				expect(rephrased).toEqual(tuple[1])
+				expect(rephrased).toEqual(result)
 			})
 		})
 	})
@@ -354,13 +354,13 @@ describe('When using the same spelling library as the CLI', () => {
 			[5, null],
 		]
 
-		parameters.forEach((tuple) => {
-			test(`with min letters of ${tuple[0]} we should get ${tuple[1]}`, async () => {
+		parameters.forEach(([minLetters, result]) => {
+			test(`with min letters of ${minLetters} we should get ${result}`, async () => {
 				const nodehun = await initNodehun()
 				const spelling = new NodehunSpelling(nodehun)
-				const rephrased = rephrase(phrase, spelling, tuple[0] as number)
+				const rephrased = rephrase(phrase, spelling, minLetters as number)
 		
-				expect(rephrased).toEqual(tuple[1])
+				expect(rephrased).toEqual(result)
 			})
 		})
 	})
@@ -373,13 +373,13 @@ describe('When using the same spelling library as the CLI', () => {
 			[2, null],
 		]
 
-		parameters.forEach((tuple) => {
-			test(`with min letters of ${tuple[0]} we should get ${tuple[1]}`, async () => {
+		parameters.forEach(([minLetters, result]) => {
+			test(`with min letters of ${minLetters} we should get ${result}`, async () => {
 				const nodehun = await initNodehun()
 				const spelling = new NodehunSpelling(nodehun)
-				const rephrased = rephrase(phrase, spelling, tuple[0] as number)
+				const rephrased = rephrase(phrase, spelling, minLetters as number)
 		
-				expect(rephrased).toEqual(tuple[1])
+				expect(rephrased).toEqual(result)
 			})
 		})
 	})
@@ -396,18 +396,18 @@ describe('When using the same spelling library as the CLI', () => {
 			[6, null],
 		]
 
-		parameters.forEach((tuple) => {
-			test(`with min letters of ${tuple[0]} we should get ${tuple[1]}`, async () => {
+		parameters.forEach(([minLetters, result]) => {
+			test(`with min letters of ${minLetters} we should get ${result}`, async () => {
 				const nodehun = await initNodehun()
 				const spelling = new NodehunSpelling(nodehun)
-				const rephrased = rephrase(phrase, spelling, tuple[0] as number)
+				const rephrased = rephrase(phrase, spelling, minLetters as number)
 		
-				expect(rephrased).toEqual(tuple[1])
+				expect(rephrased).toEqual(result)
 			})
 		})
 	})
 
-	describe('an odd interaction where words can go away', () => {
+	describe('when the remaining letters is less than the min letter count, we should throw words away', () => {
 		const parameters = [
 			["'Poor attack, yourself", 4, 'poor attack your self'],
 			["'Poor attack, yourself ", 4, 'poor attack your self'],
@@ -418,13 +418,13 @@ describe('When using the same spelling library as the CLI', () => {
 			["'Poor attack, yourself quick", 4, 'poor attack your self quick']
 		]
 
-		parameters.forEach((tuple) => {
-			test(`with min letters of ${tuple[1]}, "${tuple[0]}" should turn into "${tuple[2]}"`, async () => {
+		parameters.forEach(([phrase, minLetters, result]) => {
+			test(`with min letters of ${minLetters}, "${phrase}" should turn into "${result}"`, async () => {
 				const nodehun = await initNodehun()
 				const spelling = new NodehunSpelling(nodehun)
-				const rephrased = rephrase(tuple[0] as string, spelling, tuple[1] as number)
+				const rephrased = rephrase(phrase as string, spelling, minLetters as number)
 		 
-				expect(rephrased).toEqual(tuple[2])
+				expect(rephrased).toEqual(result)
 			})
 		})
 	});
